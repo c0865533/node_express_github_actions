@@ -11,7 +11,7 @@ app.use(express.static('views'))
 
 //http://localhost:3000/home
 app.get("/", function (req, res) {
-  res.sendFile("./views/index.html");
+  res.sendFile("./index.html");
 });
 //http://localhost:3000/home
 app.get('/home', function (req, res) {
