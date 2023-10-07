@@ -15,7 +15,7 @@ app.get("/", function (req, res) {
 });
 //http://localhost:3000/home
 app.get('/home', function (req, res) {
-    res.send("<h1>Home Page</h1>")
+    res.send("<h1>Welcome C0865533</h1>")
 })
 
 //http://localhost:3000/name
