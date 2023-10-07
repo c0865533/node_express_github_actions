@@ -1,28 +1,52 @@
 var express = require('express')
 
 var app = express()
-
+const fs = require('fs');
 const SERVER_PORT = 3000
 const SERVER_HOST = "localhost"
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(express.static('views'))
 
-
-//http://localhost:3000/
-app.get('/', function (req, res) {
+//http://localhost:3000/home
+app.get("/", function (req, res) {
+  res.sendFile("./views/index.html");
+});
+//http://localhost:3000/home
+app.get('/home', function (req, res) {
     res.send("<h1>Home Page</h1>")
 })
+
+//http://localhost:3000/name
+app.get('/name', (req, res) => {
+  res.send('<h1>C0865533 - Ambharapu Ajay Kumar Reddy</h1>')
+})
+
+//http://localhost:3000/course
+app.get('/course', (req, res) => {
+  res.send('<h1>Full Stack Software Development</h1>')
+})
+
+//http://localhost:3000/
+app.get('/test', (req, res) => {
+  fs.readFile('index.html', 'utf8', (err, data) => {
+    if (err) {
+        console.error('Error reading index.html:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+    }
+
+    // Send the HTML content as the response
+    res.send(data);
+});
+})
+
 
 //http://localhost:3000/profile
 app.post('/profile', (req, res) => {
   console.log(req.body)
   res.json(req.body)
-})
-
-//http://localhost:3000/name
-app.get('/name', (req, res) => {
-  res.send('<h1>Ajay</h1>')
 })
 
 //http://localhost:3000/admin
@@ -41,7 +65,7 @@ app.get("/valueofday/:year(\\d{4})-:month(\\d{2})-:day(\\d{2})", (req, res) => {
   console.log(req.params)
   res.send(req.params)
 });
-  
+ 
 app.listen(process.env.PORT  || SERVER_PORT, () => {
     console.log(`Server running at http://${SERVER_HOST}:${SERVER_PORT}/`);
 })
