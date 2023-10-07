@@ -28,7 +28,7 @@ app.get('/course', (req, res) => {
   res.send('<h1>Full Stack Software Development</h1>')
 })
 
-//http://localhost:3000/
+//http://localhost:3000/test
 app.get('/test', (req, res) => {
   fs.readFile('index.html', 'utf8', (err, data) => {
     if (err) {
